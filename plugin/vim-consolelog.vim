@@ -2,7 +2,7 @@ function! CLDefault(msg)
   return 'print(' . a:msg . ')'
 endfunction
 
-function! ConsoleLog(type)
+function! s:ConsoleLogFn(type)
   let current_selection = &selection
   let &selection = "inclusive"
   let atat = @@
@@ -14,11 +14,12 @@ function! ConsoleLog(type)
   endif
 
   if @@ != atat
+    let msg = trim(@@)
     silent exe "normal! o"
 
     let Format = function(get(b:, 'cl_formatter', 'CLDefault'))
-    let msg = Format(@@)
-    call setline('.', msg)
+    let out = Format(msg)
+    call setline('.', out)
     silent exe "normal! =h"
   endif
 
@@ -26,6 +27,17 @@ function! ConsoleLog(type)
   let @@ = atat
 endfunction
 
-noremap <silent> cl :set opfunc=ConsoleLog<CR>g@
-vnoremap <silent> cl :<C-U>call ConsoleLog(visualmode())<CR>
+" noremap <silent> cl :set opfunc=ConsoleLog<CR>g@
+noremap <silent><unique> <Plug>(ConsoleLog) :set opfunc=<SID>ConsoleLogFn<CR>g@
+
+if !hasmapto('<Plug>(ConsoleLog)', 'n')
+  noremap cl <Plug>(ConsoleLog)
+endif
+
+"vnoremap <silent> cl :<C-U>call ConsoleLog(visualmode())<CR>
+vnoremap <silent><unique> <Plug>(ConsoleLog) :<C-U>call <SID>ConsoleLogFn(visualmode())<CR>
+
+if !hasmapto('<Plug>(ConsoleLog)', 'v')
+  noremap cl <Plug>(ConsoleLog)
+endif
 
