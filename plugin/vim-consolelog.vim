@@ -27,17 +27,16 @@ function! s:ConsoleLogFn(type)
   let @@ = atat
 endfunction
 
-" noremap <silent> cl :set opfunc=ConsoleLog<CR>g@
 noremap <silent><unique> <Plug>(ConsoleLog) :set opfunc=<SID>ConsoleLogFn<CR>g@
 
 if !hasmapto('<Plug>(ConsoleLog)', 'n')
+  echom 'setting n plug'
   noremap cl <Plug>(ConsoleLog)
 endif
 
-"vnoremap <silent> cl :<C-U>call ConsoleLog(visualmode())<CR>
-vnoremap <silent><unique> <Plug>(ConsoleLog) :<C-U>call <SID>ConsoleLogFn(visualmode())<CR>
+vnoremap <silent><unique> <Plug>(VConsoleLog) :<C-U>call <SID>ConsoleLogFn(visualmode())<CR>
 
-if !hasmapto('<Plug>(ConsoleLog)', 'v')
-  noremap cl <Plug>(ConsoleLog)
+if !hasmapto('<Plug>(VConsoleLog)', 'v')
+  noremap cl <Plug>(VConsoleLog)
 endif
 
