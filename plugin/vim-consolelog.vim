@@ -30,7 +30,6 @@ endfunction
 noremap <silent><unique> <Plug>(ConsoleLog) :set opfunc=<SID>ConsoleLogFn<CR>g@
 
 if !hasmapto('<Plug>(ConsoleLog)', 'n')
-  echom 'setting n plug'
   noremap cl <Plug>(ConsoleLog)
 endif
 
