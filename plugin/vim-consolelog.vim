@@ -30,12 +30,12 @@ endfunction
 noremap <silent><unique> <Plug>(ConsoleLog) :set opfunc=<SID>ConsoleLogFn<CR>g@
 
 if !hasmapto('<Plug>(ConsoleLog)', 'n')
-  noremap cl <Plug>(ConsoleLog)
+  nmap cl <Plug>(ConsoleLog)
 endif
 
 vnoremap <silent><unique> <Plug>(VConsoleLog) :<C-U>call <SID>ConsoleLogFn(visualmode())<CR>
 
 if !hasmapto('<Plug>(VConsoleLog)', 'v')
-  noremap cl <Plug>(VConsoleLog)
+  vmap cl <Plug>(VConsoleLog)
 endif
 
