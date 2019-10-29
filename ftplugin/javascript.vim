@@ -1,5 +1,5 @@
 function! CLjs(msg)
-  let named = matchstr(a:msg, '\\.\\zs[a-zA-Z_]\\+$')
+  let named = matchstr(a:msg, "\\.\\zs[a-zA-Z_]\\+$")
   if named != ""
     return 'console.log({ ' . named . ': ' . a:msg . ' });'
   else
