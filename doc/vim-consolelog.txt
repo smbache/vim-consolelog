@@ -1,0 +1,3 @@
+*vim-consolelog*	Plugin for easy console logging
+
+
