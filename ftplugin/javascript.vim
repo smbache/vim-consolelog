@@ -7,4 +7,6 @@ function! CLjs(msg)
   endif
 endfunction
 
-let b:cl_formatter = 'CLjs'
+if !exists("b:cl_formatter")
+  let b:cl_formatter = 'CLjs'
+endif
