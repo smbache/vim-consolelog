@@ -27,13 +27,17 @@ function! s:ConsoleLogFn(type)
   let @@ = atat
 endfunction
 
-noremap <silent><unique> <Plug>(ConsoleLog) :set opfunc=<SID>ConsoleLogFn<CR>g@
+if mapcheck('<Plug>(ConsoleLog)') == ''
+  noremap <silent><unique> <Plug>(ConsoleLog) :set opfunc=<SID>ConsoleLogFn<CR>g@
+endif
 
 if !hasmapto('<Plug>(ConsoleLog)', 'n')
   nmap cl <Plug>(ConsoleLog)
 endif
 
-vnoremap <silent><unique> <Plug>(VConsoleLog) :<C-U>call <SID>ConsoleLogFn(visualmode())<CR>
+if mapcheck('<Plug>(VConsoleLog)') == ''
+  vnoremap <silent><unique> <Plug>(VConsoleLog) :<C-U>call <SID>ConsoleLogFn(visualmode())<CR>
+endif
 
 if !hasmapto('<Plug>(VConsoleLog)', 'v')
   vmap cl <Plug>(VConsoleLog)
